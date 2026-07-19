@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petit Pavé — Signalez ce qui ne va pas dans votre rue, à Marseille</title>
+<meta name="description" content="Petit Pavé est un outil 100% gratuit et citoyen pour signaler en 10 secondes les problèmes de voirie, d'éclairage, de propreté et plus encore, à Marseille.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#accueil" class="logo">Petit<span>Pavé</span></a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="#comment-ca-marche">Comment ça marche</a>
+      <a href="#carte">La carte</a>
+      <a href="#a-propos">À propos</a>
+    </nav>
+    <button class="btn btn-primary btn-header" data-open-report>Signaler un problème</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="accueil">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow">Un outil citoyen, gratuit, pour Marseille</span>
+        <h1>Votre rue a un souci ?<br>Dites-le en <span class="highlight">10 secondes.</span></h1>
+        <p class="hero-lead">Nid-de-poule, lampadaire éteint, dépôt sauvage, banc cassé&nbsp;: Petit Pavé permet à chaque habitant de signaler ce qui ne va pas dans son quartier, avec une photo et quelques mots. Simple, bienveillant, sans inscription, visible par tous.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" data-open-report>📍 Signaler un problème</button>
+          <a href="#carte" class="btn btn-ghost btn-lg">Voir la carte</a>
+        </div>
+        <p class="hero-note">✓ 100% gratuit &nbsp; ✓ Aucune inscription &nbsp; ✓ Visible par tout le monde</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="210" cy="150" r="150" fill="#F4EEE1"/>
+          <circle cx="300" cy="90" r="34" fill="#F0B25E"/>
+          <path d="M60 235 Q120 215 175 232 T290 230 T400 233 V420 H40 Z" fill="#E8734A" opacity="0.18"/>
+          <rect x="120" y="188" width="14" height="70" fill="#0F3D5C"/>
+          <rect x="150" y="150" width="20" height="108" fill="#0F3D5C"/>
+          <rect x="185" y="170" width="16" height="88" fill="#0F3D5C"/>
+          <path d="M215 258 V150 Q215 120 235 120 Q255 120 255 150 V258 Z" fill="#0F3D5C"/>
+          <circle cx="235" cy="108" r="12" fill="#0F3D5C"/>
+          <rect x="231" y="82" width="8" height="20" fill="#0F3D5C"/>
+          <rect x="220" y="88" width="30" height="6" fill="#0F3D5C"/>
+          <rect x="270" y="205" width="15" height="53" fill="#0F3D5C"/>
+          <rect x="300" y="178" width="18" height="80" fill="#0F3D5C"/>
+          <path d="M30 300 Q120 275 210 300 T420 300 V420 H30 Z" fill="#1F8BC7"/>
+          <path d="M0 330 Q120 305 210 330 T420 330 V420 H0 Z" fill="#0F3D5C"/>
+          <path d="M60 190 Q70 178 80 190" stroke="#0F3D5C" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M330 150 Q340 138 350 150" stroke="#0F3D5C" stroke-width="4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="comment-ca-marche">
+    <div class="container">
+      <h2>Comment ça marche</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Repérez</h3>
+          <p>Vous croisez un problème dans la rue&nbsp;? Un trottoir abîmé, un lampadaire éteint, des déchets qui traînent…</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Photographiez</h3>
+          <p>Prenez une photo, choisissez une catégorie, ajoutez un mot si vous le souhaitez. Rien d'obligatoire, tout est rapide.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Partagez</h3>
+          <p>Votre signalement apparaît sur la carte. Il aide à rendre visible ce qui mérite d'être réparé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categories">
+    <div class="container">
+      <h2>Que pouvez-vous signaler&nbsp;?</h2>
+      <p class="section-lead">Un peu de tout, en fait — tout ce qui abîme le quotidien dans votre rue.</p>
+      <div class="category-grid" id="category-grid"></div>
+    </div>
+  </section>
+
+  <section class="map-section" id="carte">
+    <div class="container">
+      <div class="map-header">
+        <div>
+          <h2>Les signalements près de chez vous</h2>
+          <p class="section-lead">Cette carte affiche les signalements de tous les habitants, en temps réel.</p>
+        </div>
+        <div class="map-header-actions">
+          <button class="btn btn-ghost btn-sm" id="refresh-btn" type="button">🔄 Actualiser</button>
+          <button class="btn btn-ghost btn-sm" id="demo-toggle" type="button">Afficher des exemples</button>
+        </div>
+      </div>
+      <div class="filter-chips" id="filter-chips"></div>
+      <div id="map" class="map"></div>
+      <p id="empty-state" class="empty-state" hidden>Aucun signalement pour l'instant. Soyez la première ou le premier à en ajouter un 🌱</p>
+    </div>
+  </section>
+
+  <section class="about" id="a-propos">
+    <div class="container about-inner">
+      <h2>Un outil citoyen, pas une plateforme de plainte</h2>
+      <p>Petit Pavé n'existe pas pour dénoncer, mais pour aider. Chaque signalement est une petite main tendue à ceux qui font vivre nos rues&nbsp;: voisins, services techniques, associations de quartier. Plus une anomalie est visible, plus vite elle peut être traitée.</p>
+      <p class="disclaimer">⚠️ Petit Pavé est un projet indépendant, imaginé par des habitants. Il n'est pas géré par la Mairie de Marseille et ne remplace pas les canaux officiels de signalement. C'est un outil citoyen, gratuit et bienveillant, pour rendre visible ensemble ce qui mérite d'être réparé.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Fait avec ❤️ pour Marseille</p>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="report-modal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="close-modal" aria-label="Fermer">✕</button>
+    <h2 id="modal-title">Signaler un problème</h2>
+    <p class="modal-sub">Trois infos suffisent&nbsp;: le type de problème, l'endroit, et si possible une photo.</p>
+    <form id="report-form">
+      <input type="text" id="website" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true">
+      <div class="field-group">
+        <label>Quel type de problème&nbsp;?</label>
+        <div class="category-picker" id="category-picker"></div>
+      </div>
+
+      <div class="field-group">
+        <label for="comment">En un mot, décrivez (optionnel)</label>
+        <textarea id="comment" maxlength="140" rows="2" placeholder="Ex. : gros nid-de-poule au milieu de la chaussée"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label for="photo-input">Une photo (optionnel, mais ça aide beaucoup)</label>
+        <label class="file-btn" for="photo-input">📷 Ajouter une photo</label>
+        <input type="file" id="photo-input" accept="image/*" capture="environment" hidden>
+        <div id="photo-preview" class="photo-preview"></div>
+      </div>
+
+      <div class="field-group">
+        <label>Où est-ce&nbsp;?</label>
+        <button type="button" id="locate-btn" class="btn btn-ghost btn-sm">📍 Utiliser ma position</button>
+        <div id="mini-map" class="mini-map"></div>
+        <p class="hint">Vous pouvez aussi cliquer sur la carte pour déplacer le repère.</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer mon signalement</button>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="js/app.js"></script>
+</body>
+</html>
