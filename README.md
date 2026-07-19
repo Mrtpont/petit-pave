@@ -1,4 +1,4 @@
-# Petit Pavé — signaler les problèmes de rue à Marseille
+# Le petit pavé marseillais — signaler les problèmes de rue à Marseille
 
 Site gratuit, sans inscription, où les habitants signalent en quelques secondes un problème dans leur rue (voirie, éclairage, déchets, mobilier urbain, espaces verts, eau, signalisation, accessibilité...) avec une photo et un commentaire. **Tous les signalements sont visibles par tout le monde**, sur une carte commune.
 
