@@ -4,13 +4,11 @@
 
 const CATEGORIES = [
   { id: 'voirie', label: 'Voirie', emoji: '🕳️', color: '#b91c1c' },
-  { id: 'eclairage', label: 'Éclairage public', emoji: '💡', color: '#9a3412' },
   { id: 'dechets', label: 'Déchets & propreté', emoji: '🗑️', color: '#64645e' },
   { id: 'mobilier', label: 'Mobilier urbain', emoji: '🪑', color: '#1e52c2' },
   { id: 'espaces-verts', label: 'Espaces verts', emoji: '🌳', color: '#166534' },
-  { id: 'eau', label: 'Eau & assainissement', emoji: '💧', color: '#2460e0' },
-  { id: 'signalisation', label: 'Signalisation', emoji: '🚧', color: '#b91c1c' },
-  { id: 'accessibilite', label: 'Accessibilité', emoji: '♿', color: '#2460e0' },
+  { id: 'voie-velo', label: 'Voie vélo', emoji: '🚲', color: '#9a3412' },
+  { id: 'signalisation', label: 'Signalisation', emoji: '🚧', color: '#2460e0' },
   { id: 'autre', label: 'Autre', emoji: '✨', color: '#a0a09a' },
 ];
 
@@ -20,7 +18,7 @@ const REFRESH_INTERVAL_MS = 45000;
 
 const DEMO_REPORTS = [
   { id: 'demo-1', category: 'voirie', comment: 'Nid-de-poule assez large au milieu de la chaussée.', lat: 43.2951, lng: 5.3739, createdAt: '2026-07-14T09:12:00Z', status: 'ouvert', demo: true },
-  { id: 'demo-2', category: 'eclairage', comment: "Lampadaire éteint depuis plusieurs jours, la rue est sombre le soir.", lat: 43.2971, lng: 5.3790, createdAt: '2026-07-15T20:41:00Z', status: 'ouvert', demo: true },
+  { id: 'demo-2', category: 'voie-velo', comment: "Piste cyclable mal marquée, dangereuse au niveau du carrefour.", lat: 43.2971, lng: 5.3790, createdAt: '2026-07-15T20:41:00Z', status: 'ouvert', demo: true },
   { id: 'demo-3', category: 'dechets', comment: 'Dépôt sauvage de sacs poubelle sur le trottoir.', lat: 43.2732, lng: 5.3856, createdAt: '2026-07-16T08:05:00Z', status: 'resolu', demo: true },
   { id: 'demo-4', category: 'mobilier', comment: 'Banc public cassé, planche manquante.', lat: 43.2853, lng: 5.3872, createdAt: '2026-07-12T15:30:00Z', status: 'ouvert', demo: true },
   { id: 'demo-5', category: 'espaces-verts', comment: "Une branche est tombée et bloque l'allée du parc.", lat: 43.2865, lng: 5.3557, createdAt: '2026-07-17T11:00:00Z', status: 'ouvert', demo: true },
@@ -191,7 +189,7 @@ function paintMarkers() {
 
   visible.forEach(report => {
     const marker = L.marker([report.lat, report.lng], { icon: pinIcon(report.category, report.status) });
-    marker.bindPopup(popupHtml(report));
+    marker.bindPopup(popupHtml(report), { minWidth: 260, maxWidth: 320 });
     marker.on('popupopen', () => {
       const checkbox = document.querySelector(`[data-resolve="${report.id}"]`);
       if (checkbox && !report.demo) {
