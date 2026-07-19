@@ -118,7 +118,9 @@ a { color: var(--primary); }
 .logo {
   font-family: var(--font-body); font-weight: 700; font-size: 1.05rem;
   color: var(--text-primary); text-decoration: none; letter-spacing: -0.01em;
+  display: inline-flex; align-items: center; gap: 8px;
 }
+.logo-mark { display: block; height: 30px; width: auto; }
 .logo span { color: var(--primary); }
 .main-nav { display: none; gap: 26px; }
 .main-nav a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.92rem; }
