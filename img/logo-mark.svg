@@ -1,0 +1,21 @@
+<svg viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le petit pavé marseillais">
+  <!-- soleil -->
+  <circle cx="52" cy="48" r="26" fill="#f6b953"/>
+  <!-- silhouette de la basilique -->
+  <path d="M64 92 L64 68 L72 68 L72 54 L80 54 L80 40 L88 40 L88 22 L95 22 L95 10 L101 10 L101 28 L109 28 L109 46 L117 46 L117 60 L128 60 L128 92 Z" fill="#8fb3dd"/>
+  <!-- vaguelettes -->
+  <path d="M6 150 Q20 140 34 150 T62 150" fill="none" stroke="#8fb3dd" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M2 164 Q16 154 30 164 T58 164" fill="none" stroke="#a9c8e8" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <!-- pavé facetté -->
+  <g>
+    <polygon points="45,95 95,68 95,108 50,132" fill="#bcd7ef"/>
+    <polygon points="95,68 150,90 148,128 95,108" fill="#6f9ccf"/>
+    <polygon points="50,132 95,108 148,128 108,158 62,158" fill="#123f6e"/>
+    <polygon points="148,128 150,90 158,98 158,132" fill="#0d3159"/>
+  </g>
+  <g stroke="#ffffff" stroke-width="3" fill="none" stroke-linejoin="round">
+    <polyline points="45,95 95,68 150,90"/>
+    <polyline points="95,68 95,108"/>
+    <polyline points="50,132 95,108 148,128"/>
+  </g>
+</svg>
