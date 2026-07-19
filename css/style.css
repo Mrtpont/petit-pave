@@ -258,6 +258,8 @@ a { color: var(--primary); }
 .site-footer { border-top: 1px solid var(--border); padding: 24px 0 48px; }
 .footer-inner { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
 .footer-inner p { margin: 0; color: var(--text-tertiary); font-size: 0.85rem; }
+.footer-admin-link { font-size: 11px; color: var(--text-tertiary); text-decoration: none; opacity: 0.55; }
+.footer-admin-link:hover { opacity: 1; text-decoration: underline; }
 
 /* Modal */
 .modal-overlay {
