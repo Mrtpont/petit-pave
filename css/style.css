@@ -241,6 +241,7 @@ a { color: var(--primary); }
   position: fixed; inset: 0; background: rgba(24, 24, 22, 0.5);
   display: flex; align-items: flex-end; justify-content: center; z-index: 100; padding: 0;
 }
+.modal-overlay[hidden] { display: none; }
 @media (min-width: 640px) { .modal-overlay { align-items: center; padding: 24px; } }
 .modal {
   background: var(--surface); width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto;
