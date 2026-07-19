@@ -249,7 +249,12 @@ function openModal() {
   const modal = document.getElementById('report-modal');
   modal.hidden = false;
   document.body.style.overflow = 'hidden';
-  setTimeout(initMiniMap, 50);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      initMiniMap();
+      setTimeout(() => { if (miniMap) miniMap.invalidateSize(); }, 250);
+    });
+  });
 }
 
 function closeModalFn() {
@@ -337,6 +342,12 @@ function initForm() {
     e.preventDefault();
     if (!selectedCategory) {
       showToast('Choisissez un type de problème pour continuer.');
+      return;
+    }
+    if (!miniMarker) {
+      // Filet de sécurité : la mini-carte n'a pas fini de s'initialiser.
+      initMiniMap();
+      showToast("Un instant, la carte se charge encore... réessayez dans une seconde.");
       return;
     }
     const latlng = miniMarker.getLatLng();
