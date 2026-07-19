@@ -147,26 +147,33 @@ a { color: var(--primary); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 14px; }
 .hero-note { font-size: 0.82rem; color: var(--text-tertiary); }
 
-/* Stat card in hero */
-.stat-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card); padding: 20px;
-}
-.stat-card-title {
-  font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 14px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.stat-card-title .live-dot {
+/* Illustration dans le hero */
+.hero-illustration { display: block; width: 100%; height: auto; }
+
+.live-dot {
   width: 7px; height: 7px; border-radius: 50%; background: var(--green);
   display: inline-block; margin-right: 6px; animation: pulse-dot 2s infinite;
 }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Ligne de statistiques "en direct" */
+.stats-strip-section { padding: 0 0 40px; }
+.stats-strip {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card); padding: 18px 22px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.stats-strip-label {
+  font-size: 13px; font-weight: 600; color: var(--text-secondary);
+  display: flex; align-items: center; white-space: nowrap;
+}
+.stats-strip-items { display: flex; flex: 1; gap: 12px; flex-wrap: wrap; }
 .stat-item {
-  background: var(--surface-subtle); border-radius: var(--radius-sm); padding: 14px 14px;
+  background: var(--surface-subtle); border-radius: var(--radius-sm); padding: 12px 18px;
+  flex: 1; min-width: 120px;
 }
 .stat-value {
-  font-family: var(--font-mono); font-size: 26.5px; font-weight: 500; letter-spacing: -0.02em;
+  font-family: var(--font-mono); font-size: 24px; font-weight: 500; letter-spacing: -0.02em;
   color: var(--text-primary); line-height: 1;
 }
 .stat-label { font-size: 12.5px; color: var(--text-tertiary); margin-top: 6px; }
@@ -339,8 +346,10 @@ textarea:focus { outline: none; border-color: var(--border-focus); box-shadow: 0
   .hero-actions .btn { width: 100%; }
   .hero-note { font-size: 0.88rem; }
 
-  .stat-card { padding: 18px; }
-  .stat-value { font-size: 30px; }
+  .stats-strip { padding: 16px; flex-direction: column; align-items: stretch; gap: 12px; }
+  .stats-strip-items { gap: 10px; }
+  .stat-item { min-width: calc(50% - 5px); flex: 1 1 calc(50% - 5px); padding: 14px; }
+  .stat-value { font-size: 28px; }
   .stat-label { font-size: 13.5px; }
 
   /* Boutons et zones tactiles agrandis */
