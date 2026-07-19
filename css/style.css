@@ -315,3 +315,76 @@ textarea:focus { outline: none; border-color: var(--border-focus); box-shadow: 0
   animation: toast-in 0.2s ease;
 }
 @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* Barre d'action fixe mobile */
+.mobile-cta-bar {
+  display: none;
+}
+
+/* ---------- Mobile : tout en plus grand, hyper simple ---------- */
+@media (max-width: 640px) {
+  body { font-size: 17px; padding-bottom: 84px; }
+
+  h1 { font-size: 2rem; letter-spacing: -0.01em; }
+  h2 { font-size: 22px; }
+
+  .container { padding: 0 18px; }
+
+  .hero { padding: 28px 0 28px; }
+  .eyebrow { font-size: 0.85rem; }
+  .hero-lead { font-size: 1.05rem; max-width: none; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+  .hero-note { font-size: 0.88rem; }
+
+  .stat-card { padding: 18px; }
+  .stat-value { font-size: 30px; }
+  .stat-label { font-size: 13.5px; }
+
+  /* Boutons et zones tactiles agrandis */
+  .btn { font-size: 1rem; padding: 14px 20px; }
+  .btn-lg { padding: 17px 22px; font-size: 1.08rem; }
+  .btn-sm { padding: 11px 16px; font-size: 0.9rem; }
+
+  /* Une seule colonne, tout est plus lisible */
+  .steps { grid-template-columns: 1fr; }
+  .step-num { width: 36px; height: 36px; font-size: 1rem; }
+  .step h3 { font-size: 17px; }
+  .step p { font-size: 1rem; }
+
+  .category-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .category-card { padding: 18px 10px; }
+  .category-card .emoji { width: 46px; height: 46px; font-size: 1.35rem; margin-bottom: 12px; }
+  .category-card .label { font-size: 0.95rem; }
+
+  .map-header { align-items: flex-start; }
+  .map-header-actions .btn { flex: 1; }
+  .filter-chips { gap: 10px; }
+  .chip { padding: 10px 14px; font-size: 0.9rem; }
+  .map { height: 360px; }
+
+  .disclaimer { font-size: 0.95rem; }
+
+  /* Modal : champs et boutons plus grands, pas de zoom involontaire sur iOS */
+  .modal { padding: 22px 18px 24px; }
+  .modal h2 { font-size: 1.35rem; }
+  .modal-sub { font-size: 0.95rem; }
+  .field-group > label { font-size: 0.95rem; }
+  .cat-btn { padding: 12px 16px; font-size: 0.95rem; }
+  textarea { font-size: 16px; padding: 13px 14px; }
+  .file-btn { padding: 13px 16px; font-size: 0.95rem; }
+  .btn-block.btn-lg { padding: 18px 22px; font-size: 1.12rem; }
+
+  /* Barre d'action fixe en bas, toujours accessible d'un pouce */
+  .mobile-cta-bar {
+    display: flex;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 60;
+    padding: 12px 18px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: rgba(244, 244, 242, 0.95);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border);
+  }
+  .mobile-cta-bar .btn { width: 100%; }
+}
