@@ -1,17 +1,17 @@
-/* Petit Pavé — logique de l'application
+/* Le petit pavé marseillais — logique de l'application
    Les signalements sont stockés côté serveur (Cloudflare D1) via /api/reports,
    et donc visibles par tout le monde. */
 
 const CATEGORIES = [
-  { id: 'voirie', label: 'Voirie', emoji: '🕳️', color: '#1f8bc7' },
-  { id: 'eclairage', label: 'Éclairage public', emoji: '💡', color: '#f0b25e' },
-  { id: 'dechets', label: 'Déchets & propreté', emoji: '🗑️', color: '#5c8a52' },
-  { id: 'mobilier', label: 'Mobilier urbain', emoji: '🪑', color: '#a15c3e' },
-  { id: 'espaces-verts', label: 'Espaces verts', emoji: '🌳', color: '#3f9142' },
-  { id: 'eau', label: 'Eau & assainissement', emoji: '💧', color: '#1f8bc7' },
-  { id: 'signalisation', label: 'Signalisation', emoji: '🚧', color: '#e8734a' },
-  { id: 'accessibilite', label: 'Accessibilité', emoji: '♿', color: '#6a5c9e' },
-  { id: 'autre', label: 'Autre', emoji: '✨', color: '#7a7a7a' },
+  { id: 'voirie', label: 'Voirie', emoji: '🕳️', color: '#b91c1c' },
+  { id: 'eclairage', label: 'Éclairage public', emoji: '💡', color: '#9a3412' },
+  { id: 'dechets', label: 'Déchets & propreté', emoji: '🗑️', color: '#64645e' },
+  { id: 'mobilier', label: 'Mobilier urbain', emoji: '🪑', color: '#1e52c2' },
+  { id: 'espaces-verts', label: 'Espaces verts', emoji: '🌳', color: '#166534' },
+  { id: 'eau', label: 'Eau & assainissement', emoji: '💧', color: '#2460e0' },
+  { id: 'signalisation', label: 'Signalisation', emoji: '🚧', color: '#b91c1c' },
+  { id: 'accessibilite', label: 'Accessibilité', emoji: '♿', color: '#2460e0' },
+  { id: 'autre', label: 'Autre', emoji: '✨', color: '#a0a09a' },
 ];
 
 const MARSEILLE_CENTER = [43.2965, 5.3698];
@@ -209,6 +209,18 @@ function paintMarkers() {
     emptyState.textContent = "Aucun signalement pour l'instant. Soyez la première ou le premier à en ajouter un 🌱";
     emptyState.hidden = visible.length > 0;
   }
+
+  updateStatCard();
+}
+
+function updateStatCard() {
+  const totalEl = document.getElementById('stat-total');
+  const resolvedEl = document.getElementById('stat-resolved');
+  if (!totalEl || !resolvedEl) return;
+  const active = latestReports.filter(r => r.status !== 'resolu').length;
+  const resolved = latestReports.filter(r => r.status === 'resolu').length;
+  totalEl.textContent = String(active);
+  resolvedEl.textContent = String(resolved);
 }
 
 async function toggleResolved(id) {
