@@ -3,8 +3,8 @@
 // POST : crée un nouveau signalement
 
 const ALLOWED_CATEGORIES = [
-  'voirie', 'eclairage', 'dechets', 'mobilier',
-  'espaces-verts', 'eau', 'signalisation', 'accessibilite', 'autre',
+  'voirie', 'dechets', 'mobilier', 'espaces-verts',
+  'voie-velo', 'signalisation', 'autre',
 ];
 
 // Grande zone large autour de Marseille (garde-fou anti-abus, pas une frontière stricte)
