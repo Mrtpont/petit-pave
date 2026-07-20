@@ -208,7 +208,76 @@ function paintMarkers() {
     emptyState.hidden = visible.length > 0;
   }
 
+  renderListView(visible);
   updateStatCard();
+}
+
+// ---------- Vue liste (alternative à la carte) ----------
+function renderListView(visible) {
+  const wrap = document.getElementById('reports-list-view');
+  if (!wrap) return;
+
+  if (visible.length === 0) {
+    wrap.innerHTML = '';
+    return;
+  }
+
+  const sorted = [...visible].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  wrap.innerHTML = sorted.map(report => {
+    const c = categoryById(report.category);
+    const resolved = report.status === 'resolu';
+    const photo = report.photo
+      ? `<img src="${report.photo}" alt="">`
+      : `<div class="report-card-noimg" style="background:${hexToSoft(c.color)}">${c.emoji}</div>`;
+    const demoTag = report.demo ? ' · <em>exemple</em>' : '';
+    const resolveControl = report.demo ? '' : `
+      <label class="report-card-resolve">
+        <input type="checkbox" data-resolve-list="${report.id}" ${resolved ? 'checked' : ''}>
+        ${resolved ? 'Marqué comme résolu' : 'Marquer comme résolu'}
+      </label>`;
+    return `
+      <div class="report-card${resolved ? ' resolved' : ''}">
+        ${photo}
+        <div class="report-card-body">
+          <div class="report-card-top">
+            <div class="report-card-cat">${c.emoji} ${c.label}${demoTag}</div>
+            <span class="report-card-status ${resolved ? 'resolved' : 'open'}">${resolved ? 'Résolu' : 'Ouvert'}</span>
+          </div>
+          ${report.comment ? `<div class="report-card-comment">${escapeHtml(report.comment)}</div>` : ''}
+          <div class="report-card-meta">Signalé le ${formatDate(report.createdAt)}</div>
+          ${resolveControl}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  wrap.querySelectorAll('[data-resolve-list]').forEach((cb) => {
+    cb.addEventListener('change', () => toggleResolved(cb.dataset.resolveList));
+  });
+}
+
+function initViewToggle() {
+  const mapBtn = document.getElementById('view-map-btn');
+  const listBtn = document.getElementById('view-list-btn');
+  const mapEl = document.getElementById('map');
+  const listEl = document.getElementById('reports-list-view');
+  if (!mapBtn || !listBtn || !mapEl || !listEl) return;
+
+  mapBtn.addEventListener('click', () => {
+    mapBtn.classList.add('active');
+    listBtn.classList.remove('active');
+    mapEl.hidden = false;
+    listEl.hidden = true;
+    setTimeout(() => { if (map) map.invalidateSize(); }, 50);
+  });
+
+  listBtn.addEventListener('click', () => {
+    listBtn.classList.add('active');
+    mapBtn.classList.remove('active');
+    mapEl.hidden = true;
+    listEl.hidden = false;
+  });
 }
 
 function updateStatCard() {
@@ -534,6 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMap();
   initDemoToggle();
   initRefreshButton();
+  initViewToggle();
   initModalControls();
   initForm();
   initShareModal();
