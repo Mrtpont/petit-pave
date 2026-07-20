@@ -338,6 +338,35 @@ a { color: var(--primary); }
 .faq-answer p { margin: 0 0 10px; }
 .faq-answer p:last-child { margin-bottom: 0; }
 
+/* Ils nous soutiennent */
+.supporters { padding: 8px 0 60px; }
+.supporters-empty {
+  background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius-md);
+  padding: 40px 24px; text-align: center; margin-top: 22px;
+}
+.supporters-empty-icon { font-size: 2rem; margin-bottom: 10px; }
+.supporters-empty p { max-width: 46ch; margin: 0 auto 16px; }
+
+/* Nous contacter */
+.contact { padding: 8px 0 64px; }
+.contact-form { max-width: 640px; margin-top: 22px; }
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: 4px 16px; }
+@media (min-width: 640px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"] {
+  width: 100%; font-family: var(--font-body); font-size: 0.92rem; padding: 11px 13px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text-primary);
+}
+.contact-form input:focus {
+  outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px var(--primary-dim);
+}
+.required { color: var(--red); }
+.contact-status { font-size: 0.85rem; margin: 10px 0 0; min-height: 1.2em; }
+.contact-status.success { color: var(--green); }
+.contact-status.error { color: var(--red); }
+
 /* Footer */
 .site-footer { border-top: 1px solid var(--border); padding: 24px 0 48px; }
 .footer-inner { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; }
@@ -487,6 +516,13 @@ textarea:focus { outline: none; border-color: var(--border-focus); box-shadow: 0
 
   .faq-item summary { font-size: 1.02rem; padding: 17px 0; }
   .faq-answer { font-size: 0.96rem; }
+
+  .supporters-empty { padding: 30px 18px; }
+  .contact-grid { gap: 0; }
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form input[type="tel"] { font-size: 16px; padding: 13px 14px; }
+  .contact-status { font-size: 0.92rem; }
 
   .share-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 20px; }
   .share-banner-text { max-width: none; }
