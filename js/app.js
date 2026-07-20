@@ -395,6 +395,45 @@ function initModalControls() {
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !document.getElementById('report-modal').hidden) closeModalFn();
+    if (e.key === 'Escape' && !document.getElementById('share-modal').hidden) closeShareModal();
+  });
+}
+
+// ---------- Partage ----------
+const SITE_URL = 'https://petit-pave.pages.dev/';
+const SHARE_TEXT = "J'ai découvert le petit pavé marseillais : un outil simple et gratuit pour signaler les soucis dans nos rues à Marseille. À partager sans modération 👇";
+
+function openShareModal() {
+  document.getElementById('share-modal').hidden = false;
+}
+
+function closeShareModal() {
+  document.getElementById('share-modal').hidden = true;
+}
+
+function initShareModal() {
+  const modal = document.getElementById('share-modal');
+  if (!modal) return;
+
+  const encodedUrl = encodeURIComponent(SITE_URL);
+  const encodedText = encodeURIComponent(SHARE_TEXT);
+
+  document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+  document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+  document.getElementById('share-x').href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+  document.getElementById('share-email').href = `mailto:?subject=${encodeURIComponent('Le petit pavé marseillais')}&body=${encodedText}%20${encodedUrl}`;
+
+  document.querySelectorAll('[data-open-share]').forEach(btn => btn.addEventListener('click', openShareModal));
+  document.getElementById('close-share-modal').addEventListener('click', closeShareModal);
+  modal.addEventListener('click', (e) => { if (e.target.id === 'share-modal') closeShareModal(); });
+
+  document.getElementById('share-copy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(SITE_URL);
+      showToast('Lien copié ! 🔗');
+    } catch {
+      showToast("Impossible de copier le lien, réessayez.");
+    }
   });
 }
 
@@ -408,4 +447,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initRefreshButton();
   initModalControls();
   initForm();
+  initShareModal();
 });
