@@ -20,12 +20,15 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="#accueil" class="logo"><img src="img/logo-mark.svg" alt="" class="logo-mark" width="34" height="31">Le petit pavé <span>marseillais</span></a>
-    <nav class="main-nav" aria-label="Navigation principale">
-      <a href="#comment-ca-marche">Comment ça marche</a>
-      <a href="#carte">La carte</a>
-      <a href="#a-propos">À propos</a>
-    </nav>
-    <button class="btn btn-primary btn-header" data-open-report>Signaler un problème</button>
+    <div class="header-right">
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a href="#comment-ca-marche">Comment ça marche</a>
+        <a href="#carte">La carte</a>
+        <a href="#a-propos">À propos</a>
+      </nav>
+      <button class="btn-share-icon" data-open-share type="button" aria-label="Partager le site" title="Partager">🔗</button>
+      <button class="btn btn-primary btn-header" data-open-report>Signaler un problème</button>
+    </div>
   </div>
 </header>
 
@@ -181,7 +184,10 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <p>Fait avec ❤️ pour Marseille</p>
-    <a href="admin.html" class="footer-admin-link">Accès admin</a>
+    <div class="footer-links">
+      <button class="footer-link-btn" data-open-share type="button">🔗 Partager le site</button>
+      <a href="admin.html" class="footer-admin-link">Accès admin</a>
+    </div>
   </div>
 </footer>
 
