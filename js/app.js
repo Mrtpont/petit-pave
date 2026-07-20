@@ -469,7 +469,7 @@ function initModalControls() {
 }
 
 // ---------- Partage ----------
-const SITE_URL = 'https://petit-pave.pages.dev/';
+const SITE_URL = 'https://petit-pave-marseillais.pages.dev/';
 const SHARE_TEXT = "J'ai découvert le petit pavé marseillais : un outil simple et gratuit pour signaler les soucis dans nos rues à Marseille. À partager sans modération 👇";
 
 function openShareModal() {
