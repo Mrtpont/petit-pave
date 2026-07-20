@@ -437,6 +437,36 @@ function initShareModal() {
   });
 }
 
+// ---------- Menu burger (mobile) ----------
+function initMobileMenu() {
+  const btn = document.getElementById('burger-toggle');
+  const menu = document.getElementById('mobile-nav');
+  if (!btn || !menu) return;
+
+  function closeMenu() {
+    menu.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  function openMenu() {
+    menu.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  btn.addEventListener('click', () => {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    if (isOpen) closeMenu(); else openMenu();
+  });
+
+  // Le menu se referme dès qu'on choisit un lien ou une action à l'intérieur.
+  menu.querySelectorAll('a, button').forEach((el) => {
+    el.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu.hidden) closeMenu();
+  });
+}
+
 // ---------- Init ----------
 document.addEventListener('DOMContentLoaded', () => {
   renderCategoryGrid();
@@ -448,4 +478,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initModalControls();
   initForm();
   initShareModal();
+  initMobileMenu();
 });
