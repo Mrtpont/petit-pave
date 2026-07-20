@@ -124,6 +124,18 @@
     </div>
   </section>
 
+  <section class="share-banner-section">
+    <div class="container">
+      <div class="share-banner">
+        <div class="share-banner-text">
+          <div class="share-banner-title">📣 Faites connaître le petit pavé marseillais</div>
+          <div class="share-banner-sub">Plus on est nombreux à signaler, plus notre rue s'améliore vite. Partagez le site autour de vous&nbsp;!</div>
+        </div>
+        <button class="btn btn-primary btn-lg" data-open-share type="button">🔗 Partager</button>
+      </div>
+    </div>
+  </section>
+
   <section class="about" id="a-propos">
     <div class="container about-grid">
       <div class="about-text">
@@ -210,6 +222,31 @@
 
       <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer mon signalement</button>
     </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="share-modal" hidden>
+  <div class="modal modal-share" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
+    <button class="modal-close" id="close-share-modal" aria-label="Fermer">✕</button>
+    <h2 id="share-modal-title">Partager le petit pavé marseillais</h2>
+    <p class="modal-sub">Faites passer le mot à vos voisins, votre famille, vos amis 🙌</p>
+    <div class="share-grid">
+      <a class="share-btn share-facebook" id="share-facebook" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="share-icon">📘</span> Facebook
+      </a>
+      <a class="share-btn share-whatsapp" id="share-whatsapp" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="share-icon">💬</span> WhatsApp
+      </a>
+      <a class="share-btn share-x" id="share-x" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="share-icon">✖️</span> X / Twitter
+      </a>
+      <a class="share-btn share-email" id="share-email" href="#">
+        <span class="share-icon">✉️</span> E-mail
+      </a>
+      <button class="share-btn share-copy" id="share-copy" type="button">
+        <span class="share-icon">🔗</span> Copier le lien
+      </button>
+    </div>
   </div>
 </div>
 
