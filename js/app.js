@@ -467,6 +467,65 @@ function initMobileMenu() {
   });
 }
 
+// ---------- Formulaire de contact ----------
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+  const statusEl = document.getElementById('contact-status');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.textContent = '';
+    statusEl.classList.remove('success', 'error');
+
+    const nom = document.getElementById('contact-nom').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    if (!nom || !email) {
+      statusEl.textContent = 'Le nom et l\'e-mail sont obligatoires.';
+      statusEl.classList.add('error');
+      return;
+    }
+
+    const payload = {
+      nom,
+      prenom: document.getElementById('contact-prenom').value.trim(),
+      email,
+      telephone: document.getElementById('contact-telephone').value.trim(),
+      objet: document.getElementById('contact-objet').value.trim(),
+      message: document.getElementById('contact-message').value.trim(),
+      website: document.getElementById('contact-website').value, // piège à robots
+    };
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = 'Envoi…';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        form.reset();
+        statusEl.textContent = 'Merci, votre message a bien été envoyé ! 🙌';
+        statusEl.classList.add('success');
+      } else {
+        statusEl.textContent = data.error || "Une erreur est survenue. Réessayez dans un instant.";
+        statusEl.classList.add('error');
+      }
+    } catch {
+      statusEl.textContent = 'Erreur réseau. Réessayez.';
+      statusEl.classList.add('error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+}
+
 // ---------- Init ----------
 document.addEventListener('DOMContentLoaded', () => {
   renderCategoryGrid();
@@ -479,4 +538,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initForm();
   initShareModal();
   initMobileMenu();
+  initContactForm();
 });
