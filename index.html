@@ -131,12 +131,17 @@
           <p class="section-lead">Cette carte affiche les signalements de tous les habitants, en temps réel.</p>
         </div>
         <div class="map-header-actions">
+          <div class="view-toggle" role="group" aria-label="Choisir l'affichage">
+            <button class="view-toggle-btn active" id="view-map-btn" type="button">🗺️ Carte</button>
+            <button class="view-toggle-btn" id="view-list-btn" type="button">📋 Liste</button>
+          </div>
           <button class="btn btn-ghost btn-sm" id="refresh-btn" type="button">🔄 Actualiser</button>
           <button class="btn btn-ghost btn-sm" id="demo-toggle" type="button">Afficher des exemples</button>
         </div>
       </div>
       <div class="filter-chips" id="filter-chips"></div>
       <div id="map" class="map"></div>
+      <div id="reports-list-view" class="reports-list-view" hidden></div>
       <p id="empty-state" class="empty-state" hidden>Aucun signalement pour l'instant. Soyez la première ou le premier à en ajouter un 🌱</p>
     </div>
   </section>
