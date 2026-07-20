@@ -24,12 +24,24 @@
       <nav class="main-nav" aria-label="Navigation principale">
         <a href="#comment-ca-marche">Comment ça marche</a>
         <a href="#carte">La carte</a>
+        <a href="#faq">FAQ</a>
         <a href="#a-propos">À propos</a>
       </nav>
       <button class="btn-share-icon" data-open-share type="button" aria-label="Partager le site" title="Partager">🔗</button>
       <button class="btn btn-primary btn-header" data-open-report>Signaler un problème</button>
+      <button class="burger-btn" id="burger-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile" hidden>
+    <a href="#comment-ca-marche">Comment ça marche</a>
+    <a href="#carte">La carte</a>
+    <a href="#faq">FAQ</a>
+    <a href="#a-propos">À propos</a>
+    <button class="mobile-nav-share" data-open-share type="button">🔗 Partager le site</button>
+    <button class="btn btn-primary btn-lg mobile-nav-cta" data-open-report type="button">📍 Signaler un problème</button>
+  </nav>
 </header>
 
 <main>
@@ -175,6 +187,46 @@
       </div>
       <div class="about-art" aria-hidden="true">
         <img src="img/about-illustration.png" alt="Un groupe d'habitants qui échange autour d'une carte de Marseille" class="about-illustration">
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container">
+      <h2>Questions fréquentes</h2>
+      <p class="section-lead">Tout ce qu'il faut savoir sur le petit pavé marseillais.</p>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Est-ce que ça remplace un service officiel de la ville&nbsp;?</summary>
+          <div class="faq-answer">
+            <p>Non. Le petit pavé marseillais est un projet citoyen et collaboratif, indépendant de la Métropole Aix-Marseille-Provence et de la Mairie de Marseille. Il ne remplace pas <strong>« Adoptez le Réflexe »</strong>, l'application officielle de la Métropole qui permet de signaler un problème de propreté ou de voirie et de déclencher une intervention des services municipaux.</p>
+            <p>Notre outil est complémentaire&nbsp;: il sert à rendre visible, ensemble, ce qui mérite d'être réparé dans le quartier, dans un esprit d'entraide entre habitants. Pour une intervention officielle garantie, on vous recommande d'utiliser en parallèle « Adoptez le Réflexe ».</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Qui peut voir mes signalements&nbsp;?</summary>
+          <div class="faq-answer">
+            <p>Tout le monde&nbsp;! La carte est publique et visible par tous les habitants, c'est tout l'intérêt d'un outil collaboratif. En revanche, aucune information personnelle n'est demandée&nbsp;: vos signalements restent anonymes.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Est-ce vraiment gratuit&nbsp;?</summary>
+          <div class="faq-answer">
+            <p>Oui, 100%&nbsp;gratuit, sans inscription, sans publicité et sans collecte de données inutile. C'est un projet indépendant porté par des habitants, pas une entreprise.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Qui gère ce site et modère les signalements&nbsp;?</summary>
+          <div class="faq-answer">
+            <p>Le petit pavé marseillais est géré par des habitants bénévoles. Les signalements sont relus pour s'assurer que chacun reste bienveillant et pertinent&nbsp;; ceux qui ne respectent pas cet esprit peuvent être modifiés ou retirés.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>En cas d'urgence, dois-je utiliser ce site&nbsp;?</summary>
+          <div class="faq-answer">
+            <p>Non&nbsp;: en cas de danger immédiat (fuite de gaz, accident, danger sur la voie publique...), contactez directement les services d'urgence (15, 17, 18 ou 112) ou la Mairie. Le petit pavé marseillais n'est pas un outil de signalement d'urgence.</p>
+          </div>
+        </details>
       </div>
     </div>
   </section>
