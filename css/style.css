@@ -229,8 +229,36 @@ a { color: var(--primary); }
 .map {
   height: 460px; border-radius: var(--radius-md); overflow: hidden;
   border: 1px solid var(--border); box-shadow: var(--shadow-card);
+  /* Isole le stacking context de Leaflet (panes/contrôles jusqu'à z-index 1000)
+     pour qu'il ne passe jamais au-dessus du header sticky au scroll. */
+  isolation: isolate; position: relative;
 }
 .empty-state { text-align: center; padding: 20px; color: var(--text-tertiary); font-size: 0.9rem; }
+
+/* Bannière de partage */
+.share-banner-section { padding: 0 0 56px; }
+.share-banner {
+  background: var(--primary-light); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 22px 26px; display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; flex-wrap: wrap;
+}
+.share-banner-text { max-width: 60ch; }
+.share-banner-title { font-weight: 700; font-size: 1.02rem; color: var(--text-primary); margin-bottom: 4px; }
+.share-banner-sub { font-size: 0.9rem; color: var(--text-secondary); }
+.share-banner .btn { flex-shrink: 0; }
+
+/* Modal de partage */
+.modal-share .modal-sub { margin-bottom: 22px; }
+.share-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.share-btn {
+  display: flex; align-items: center; gap: 10px; padding: 13px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--surface); color: var(--text-primary);
+  font-weight: 600; font-size: 0.9rem; text-decoration: none; cursor: pointer;
+  font-family: var(--font-body); transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.share-btn:hover { box-shadow: var(--shadow-card-hover); border-color: var(--text-disabled); }
+.share-icon { font-size: 1.15rem; line-height: 1; }
+.share-copy { grid-column: span 2; justify-content: center; }
 
 /* About */
 .about { padding: 8px 0 64px; }
@@ -394,6 +422,13 @@ textarea:focus { outline: none; border-color: var(--border-focus); box-shadow: 0
   .map { height: 360px; }
 
   .disclaimer { font-size: 0.95rem; }
+
+  .share-banner { flex-direction: column; align-items: stretch; text-align: center; padding: 20px; }
+  .share-banner-text { max-width: none; }
+  .share-banner .btn { width: 100%; }
+  .share-grid { grid-template-columns: 1fr; }
+  .share-copy { grid-column: auto; }
+  .share-btn { padding: 15px 16px; font-size: 0.98rem; }
 
   /* Modal : champs et boutons plus grands, pas de zoom involontaire sur iOS */
   .modal { padding: 22px 18px 24px; }
