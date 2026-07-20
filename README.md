@@ -15,7 +15,7 @@ Tout tourne sur **Cloudflare** (hébergement + base de données), dans la limite
 ### 1. Mettre les fichiers sur GitHub
 
 1. Crée un compte gratuit sur [github.com](https://github.com) si tu n'en as pas
-2. Crée un nouveau dépôt (bouton vert "New"), nomme-le par exemple `petit-pave`, laisse-le public ou privé, ne coche aucune case d'initialisation
+2. Crée un nouveau dépôt (bouton vert "New"), nomme-le par exemple `petit-pave-marseillais`, laisse-le public ou privé, ne coche aucune case d'initialisation
 3. Sur la page du dépôt vide, clique sur "uploading an existing file" et glisse-dépose tous les fichiers et dossiers de ce projet (en gardant bien la structure des dossiers `css/`, `js/`, `functions/`)
 4. Valide ("Commit changes")
 
@@ -29,9 +29,9 @@ Tout tourne sur **Cloudflare** (hébergement + base de données), dans la limite
 ### 3. Publier le site (Cloudflare Pages)
 
 1. Toujours dans **Workers & Pages**, onglet **Overview** → **Create** → **Pages** → **Connect to Git**
-2. Autorise Cloudflare à accéder à ton compte GitHub, puis choisis le dépôt `petit-pave`
+2. Autorise Cloudflare à accéder à ton compte GitHub, puis choisis le dépôt `petit-pave-marseillais`
 3. Dans les réglages de build : laisse la commande de build vide et le dossier de sortie sur `/` (racine) — c'est un site statique, il n'y a rien à compiler
-4. Clique sur **Save and Deploy** — Cloudflare te donne une adresse du type `petit-pave.pages.dev`
+4. Clique sur **Save and Deploy** — Cloudflare te donne une adresse du type `petit-pave-marseillais.pages.dev`
 
 ### 4. Relier le site à la base de données
 
