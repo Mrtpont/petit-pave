@@ -26,6 +26,7 @@
         <a href="#carte">La carte</a>
         <a href="#faq">FAQ</a>
         <a href="#a-propos">À propos</a>
+        <a href="#contact">Contact</a>
       </nav>
       <button class="btn-share-icon" data-open-share type="button" aria-label="Partager le site" title="Partager">🔗</button>
       <button class="btn btn-primary btn-header" data-open-report>Signaler un problème</button>
@@ -39,6 +40,7 @@
     <a href="#carte">La carte</a>
     <a href="#faq">FAQ</a>
     <a href="#a-propos">À propos</a>
+    <a href="#contact">Contact</a>
     <button class="mobile-nav-share" data-open-share type="button">🔗 Partager le site</button>
     <button class="btn btn-primary btn-lg mobile-nav-cta" data-open-report type="button">📍 Signaler un problème</button>
   </nav>
@@ -228,6 +230,56 @@
           </div>
         </details>
       </div>
+    </div>
+  </section>
+
+  <section class="supporters" id="soutiens">
+    <div class="container">
+      <h2>Ils nous soutiennent</h2>
+      <p class="section-lead">Associations de quartier, médias locaux, commerces&nbsp;: bientôt ici, les structures qui soutiennent le petit pavé marseillais.</p>
+      <div class="supporters-empty">
+        <div class="supporters-empty-icon">🤝</div>
+        <p>Aucun partenaire pour l'instant — vous représentez une association, un média ou un commerce et vous voulez nous soutenir&nbsp;? On serait ravis d'en discuter.</p>
+        <a href="#contact" class="btn btn-ghost btn-sm">Nous contacter</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Nous contacter</h2>
+      <p class="section-lead">Une question, une envie de nous soutenir, une remarque sur le site&nbsp;? Écrivez-nous, on vous répond dès que possible.</p>
+      <form id="contact-form" class="contact-form">
+        <input type="text" id="contact-website" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px" aria-hidden="true">
+        <div class="contact-grid">
+          <div class="field-group">
+            <label for="contact-nom">Nom <span class="required">*</span></label>
+            <input type="text" id="contact-nom" required maxlength="80" autocomplete="family-name">
+          </div>
+          <div class="field-group">
+            <label for="contact-prenom">Prénom</label>
+            <input type="text" id="contact-prenom" maxlength="80" autocomplete="given-name">
+          </div>
+          <div class="field-group">
+            <label for="contact-email">E-mail <span class="required">*</span></label>
+            <input type="email" id="contact-email" required maxlength="180" autocomplete="email">
+          </div>
+          <div class="field-group">
+            <label for="contact-telephone">Téléphone</label>
+            <input type="tel" id="contact-telephone" maxlength="20" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="contact-objet">Objet</label>
+          <input type="text" id="contact-objet" maxlength="120" placeholder="Ex. : proposition de partenariat">
+        </div>
+        <div class="field-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" rows="4" maxlength="1000"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Envoyer le message</button>
+        <p class="contact-status" id="contact-status"></p>
+      </form>
     </div>
   </section>
 

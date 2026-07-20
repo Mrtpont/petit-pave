@@ -42,6 +42,22 @@
   .admin-empty { text-align: center; color: var(--text-tertiary); padding: 40px 0; }
   .btn-danger-confirm { background: #b91c1c; color: #fff; border-color: #b91c1c; }
   [hidden] { display: none !important; }
+  .admin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .admin-tab {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 9px 16px; font-size: 0.88rem; font-weight: 600; cursor: pointer; color: var(--text-secondary);
+    font-family: var(--font-body);
+  }
+  .admin-tab.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+  .message-row {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 14px;
+  }
+  .message-row-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+  .message-row-name { font-weight: 700; font-size: 0.98rem; color: var(--text-primary); }
+  .message-row-contact { font-size: 0.82rem; color: var(--text-tertiary); }
+  .message-row-object { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+  .message-row-body { font-size: 0.92rem; color: var(--text-primary); white-space: pre-wrap; margin-bottom: 10px; }
 </style>
 </head>
 <body>
@@ -70,14 +86,32 @@
   </div>
 
   <div id="panel-view" hidden>
-    <div class="admin-panel-header">
-      <h1>Modération des signalements</h1>
-      <div class="admin-toolbar">
-        <button class="btn btn-ghost btn-sm" id="admin-refresh">🔄 Actualiser</button>
-        <button class="btn btn-ghost btn-sm" id="admin-logout">Se déconnecter</button>
-      </div>
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="tab-reports" type="button">📍 Signalements</button>
+      <button class="admin-tab" id="tab-messages" type="button">✉️ Messages</button>
     </div>
-    <div id="reports-list"></div>
+
+    <div id="reports-view">
+      <div class="admin-panel-header">
+        <h1>Modération des signalements</h1>
+        <div class="admin-toolbar">
+          <button class="btn btn-ghost btn-sm" id="admin-refresh">🔄 Actualiser</button>
+          <button class="btn btn-ghost btn-sm" id="admin-logout">Se déconnecter</button>
+        </div>
+      </div>
+      <div id="reports-list"></div>
+    </div>
+
+    <div id="messages-view" hidden>
+      <div class="admin-panel-header">
+        <h1>Messages reçus</h1>
+        <div class="admin-toolbar">
+          <button class="btn btn-ghost btn-sm" id="admin-refresh-messages">🔄 Actualiser</button>
+          <button class="btn btn-ghost btn-sm" id="admin-logout-2">Se déconnecter</button>
+        </div>
+      </div>
+      <div id="messages-list"></div>
+    </div>
   </div>
 </div>
 
@@ -146,12 +180,36 @@ loginForm.addEventListener('submit', async (e) => {
   }
 });
 
-document.getElementById('admin-logout').addEventListener('click', async () => {
+async function doLogout() {
   await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' }).catch(() => {});
   showLogin();
-});
+}
+document.getElementById('admin-logout').addEventListener('click', doLogout);
+document.getElementById('admin-logout-2').addEventListener('click', doLogout);
 
 document.getElementById('admin-refresh').addEventListener('click', loadReports);
+document.getElementById('admin-refresh-messages').addEventListener('click', loadMessages);
+
+// ---------- Onglets ----------
+const tabReports = document.getElementById('tab-reports');
+const tabMessages = document.getElementById('tab-messages');
+const reportsView = document.getElementById('reports-view');
+const messagesView = document.getElementById('messages-view');
+
+tabReports.addEventListener('click', () => {
+  tabReports.classList.add('active');
+  tabMessages.classList.remove('active');
+  reportsView.hidden = false;
+  messagesView.hidden = true;
+});
+
+tabMessages.addEventListener('click', () => {
+  tabMessages.classList.add('active');
+  tabReports.classList.remove('active');
+  messagesView.hidden = false;
+  reportsView.hidden = true;
+  loadMessages();
+});
 
 function categoryOptions(selected) {
   return CATEGORIES.map(c => `<option value="${c.id}" ${c.id === selected ? 'selected' : ''}>${c.emoji} ${c.label}</option>`).join('');
@@ -272,6 +330,92 @@ async function deleteReport(id, row) {
       row.remove();
       if (!reportsList.querySelector('.report-row')) {
         reportsList.innerHTML = '<p class="admin-empty">Aucun signalement pour l’instant.</p>';
+      }
+    } else {
+      btn.textContent = 'Erreur';
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Supprimer'; }, 1800);
+    }
+  } catch {
+    btn.textContent = 'Erreur réseau';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = 'Supprimer'; }, 1800);
+  }
+}
+
+const messagesList = document.getElementById('messages-list');
+
+async function loadMessages() {
+  messagesList.innerHTML = '<p class="admin-empty">Chargement…</p>';
+  let messages;
+  try {
+    const res = await fetch('/api/admin/messages', { credentials: 'include' });
+    if (res.status === 401) { showLogin(); return; }
+    messages = await res.json();
+  } catch {
+    messagesList.innerHTML = '<p class="admin-empty">Impossible de charger les messages.</p>';
+    return;
+  }
+
+  if (!Array.isArray(messages) || messages.length === 0) {
+    messagesList.innerHTML = '<p class="admin-empty">Aucun message pour l’instant.</p>';
+    return;
+  }
+
+  messagesList.innerHTML = messages.map(m => `
+    <div class="message-row" data-id="${m.id}">
+      <div class="message-row-header">
+        <div>
+          <div class="message-row-name">${escapeHtml(m.nom)}${m.prenom ? ' ' + escapeHtml(m.prenom) : ''}</div>
+          <div class="message-row-contact">${escapeHtml(m.email)}${m.telephone ? ' · ' + escapeHtml(m.telephone) : ''}</div>
+        </div>
+        <div class="report-meta">${formatDate(m.createdAt)}</div>
+      </div>
+      ${m.objet ? `<div class="message-row-object">${escapeHtml(m.objet)}</div>` : ''}
+      ${m.message ? `<div class="message-row-body">${escapeHtml(m.message)}</div>` : ''}
+      <div class="report-actions">
+        <button class="btn btn-ghost btn-sm m-delete">Supprimer</button>
+      </div>
+    </div>
+  `).join('');
+
+  messagesList.querySelectorAll('.message-row').forEach(row => {
+    const id = row.dataset.id;
+    row.querySelector('.m-delete').addEventListener('click', () => deleteMessage(id, row));
+  });
+}
+
+async function deleteMessage(id, row) {
+  const btn = row.querySelector('.m-delete');
+
+  if (!btn.dataset.confirming) {
+    btn.dataset.confirming = '1';
+    btn.textContent = 'Confirmer ?';
+    btn.classList.add('btn-danger-confirm');
+    setTimeout(() => {
+      if (btn.dataset.confirming) {
+        delete btn.dataset.confirming;
+        btn.textContent = 'Supprimer';
+        btn.classList.remove('btn-danger-confirm');
+      }
+    }, 3000);
+    return;
+  }
+
+  delete btn.dataset.confirming;
+  btn.disabled = true;
+  btn.textContent = 'Suppression…';
+
+  try {
+    const res = await fetch(`/api/admin/messages/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    });
+    if (res.status === 401) { showLogin(); return; }
+    if (res.ok) {
+      row.remove();
+      if (!messagesList.querySelector('.message-row')) {
+        messagesList.innerHTML = '<p class="admin-empty">Aucun message pour l’instant.</p>';
       }
     } else {
       btn.textContent = 'Erreur';
